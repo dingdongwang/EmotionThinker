@@ -29,7 +29,7 @@ For details, please refer to our
 
 **EmotionThinker** is the first RL–enhanced SpeechLLM framework for interpretable speech emotion reasoning.
 
-Unlike conventional speech emotion recognition (SER) systems that treat emotion as a flat classification problem, EmotionThinker reframes SER as a deep reasoning problem, enabling models to jointly produce accurate emotion labels and **structured, human-aligned explanations**.
+Unlike conventional speech emotion recognition (SER) systems that treat emotion as a flat classification problem, EmotionThinker reframes SER as a **deep reasoning** problem, enabling models to jointly produce accurate emotion labels and **structured, human-aligned explanations**.
 
 EmotionThinker offers the following advantages: 
 
@@ -37,7 +37,6 @@ EmotionThinker offers the following advantages:
 - Deep reasoning ability to integrate emotion-related cues for justification; 
 - Fine-grained audio caption covering speaker traits, prosodic cues and semantic information. 
 
-EmotionThinker consistently surpasses state-of-the-art SpeechLLMs in both emotion accuracy and explanation quality, advancing speech emotion understanding toward *interpretable, multimodal reasoning*.
 
 ## News
 
