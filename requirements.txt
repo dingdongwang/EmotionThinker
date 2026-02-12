@@ -1,1 +1,6 @@
-
+transformers
+librosa
+numpy
+g2p_en
+ftfy
+nltk
