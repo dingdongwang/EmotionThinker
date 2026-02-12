@@ -18,7 +18,7 @@ For details, please refer to our
 <img src="https://img.shields.io/badge/Models-HuggingFace-yellow">
 </a>
 
-<a href="https://github.com/dingdongwang/EmotionThinker_tmp/tree/main/EmotionCoT">
+<a href="https://huggingface.co/datasets/ddwang2000/EmotionCoT">
 <img src="https://img.shields.io/badge/Dataset-EmotionCoT-blue">
 </a>
 
@@ -41,9 +41,9 @@ EmotionThinker consistently surpasses state-of-the-art SpeechLLMs in both emotio
 
 ## News
 
-- [Feb. 12, 2026] We open-source the **EmotionThinker** pretrained model on [Hugging Face](https://huggingface.co/ddwang2000/EmotionThinker).
+- [Feb. 12, 2026] We open-source the **EmotionThinker** model on [Hugging Face](https://huggingface.co/ddwang2000/EmotionThinker).
 
-- [Feb. 12, 2026] We release the **EmotionCoT dataset** in this GitHub repository.
+- [Feb. 12, 2026] We release the **EmotionCoT dataset** on [Hugging Face](https://huggingface.co/datasets/ddwang2000/EmotionCoT).
 
 - [Feb. 05, 2026] 🎉 EmotionThinker is selected for **Oral Presentation** at ICLR 2026.
 
@@ -83,7 +83,7 @@ The **EmotionCoT** section provide structured prosody labeling and Chain-of-Thou
 - [EARS](https://github.com/facebookresearch/ears_dataset)
 - [MSP-Podcast](https://www.lab-msp.com/MSP/MSP-Podcast.html)
 
-**EmotionCoT Annotations:** We provide prosody labeling and CoT-style emotion reasoning annotations for: IEMOCAP, MELD, Expresso, EARS, MSP-Podcast (partial). Details refer to the JSONL files: `EmotionCoT/data/*.jsonl`
+**EmotionCoT Annotations:** We provide prosody labeling and CoT-style emotion reasoning annotations for: IEMOCAP, MELD, Expresso, EARS, MSP-Podcast (partial). Please download the EmotionCoT dataset on [Hugging Face](https://huggingface.co/datasets/ddwang2000/EmotionCoT)
 
 ### Automatic Labeling Pipeline
 
