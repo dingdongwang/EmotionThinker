@@ -1,0 +1,25 @@
+# Signal analysis (the extract stage runs on CPU and needs nothing else)
+librosa>=0.10
+numpy>=1.24
+scipy>=1.10
+soundfile>=0.12
+
+# Grapheme-to-phoneme for the speaking rate denominator (English only).
+# The POS tagger and CMUdict are fetched on first use.
+g2p_en>=2.1
+nltk>=3.8
+
+# Text normalisation of transcripts
+ftfy>=6.0
+
+# Speaker attributes and word-level stress
+torch>=2.0
+transformers>=4.40
+huggingface_hub>=0.20
+safetensors>=0.4
+
+# Reasoning augmentation (api_call.py only)
+openai>=1.30
+
+# Optional, only for the progress bar
+tqdm

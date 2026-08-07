@@ -54,7 +54,7 @@ EmotionThinker offers the following advantages:
 
 ```bash
 conda create -n emotionthinker python=3.10
-conda activate voicebench
+conda activate emotionthinker
 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.txt
 ```
@@ -94,14 +94,23 @@ To facilitate large-scale labeling and data augmentation, we provide an automate
 
 ```bash
 conda create -n emotionthinker python=3.10
-conda activate voicebench
+conda activate emotionthinker
 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.txt
 ```
 
 **Step 1: Download Required Models**
 
-Before running the pipeline, download the required models (e.g., pitch-energy extractor, gender classifier, etc.) and configure paths in the script.
+The speaker age and gender model (`audeering/wav2vec2-large-robust-24-ft-age-gender`) is fetched from Hugging Face on first use, and pitch, energy and speaking rate are computed with signal processing only, so neither needs setting up.
+
+Word-level stress uses [WhiStress](https://github.com/slp-rl/WhiStress), which is not on PyPI and has to be checked out separately:
+
+```bash
+git clone https://github.com/slp-rl/WhiStress && python WhiStress/download_weights.py
+export WHISTRESS_DIR=$PWD/WhiStress
+```
+
+`WHISTRESS_DIR` can also be passed as `--whistress-dir`. If you do not need stress labels, run the pipeline with `--skip-models`, which also skips gender and age.
 
 **Step 2: Prepare Input JSONL**
 
@@ -121,19 +130,28 @@ python EmotionCoT/pipeline/prosody_labeling.py \
     --output_path /path/to/prosody_labeling.jsonl
 ```
 The script will automatically extract and label:
-- `pitch level`: low / normal / high
+- `pitch_level`: low / normal / high
 - `energy_level`: low / normal / high
 - `speed_level`: slow / normal / fast
 - `stressed_words`: stressed words from transcription
 - `intonation`: rising / falling / rising-falling / falling-rising / flat / expressive
-- `gender`: Male / Female
+- `gender`: Male / Female 
 - `age_level`: Child / Teenager / Young Adult / Middle-aged / Elderly
 
-The output will be saved as a JSONL file with enriched prosody annotations.
+The output will be saved as a JSONL file with enriched prosody annotations. Any
+other fields in the input, such as `emotion`, are carried through untouched.
+
+`pitch_level`, `energy_level` and `speed_level` are relative to the corpus you
+pass in, since recording gain and speaker identity make absolute cut points
+meaningless across datasets. `intonation` is `uncertain` or `too_short` when the
+utterance does not carry enough voiced speech to support a contour judgement;
+the CoT prompt in the next step knows to skip those. The measurements the labels
+were derived from (F0 in Hz, level in dBFS, phonemes per second, and so on) are
+kept in the output as well — see `EmotionCoT/pipeline/README.md`.
 
 ### 4. (Optional) EmotionCoT-style Reasoning Augmentation
 
-If you are interested in augmenting your dataset with EmotionCoT-like reasoning format, you can use the provided `api_call.py` script.
+If you are interested in augmenting your dataset with EmotionCoT-like reasoning format, you can use the provided `api_call.py` script. It uses the prompt template from Appendix B.3 of the paper.
 
 Configure your OpenAI API token in the script, then run:
 ```bash
@@ -141,7 +159,7 @@ python EmotionCoT/pipeline/api_call.py \
     --input_path /path/to/prosody_labeling.jsonl \
     --output_path /path/to/emotioncot_augmented.jsonl
 ```
-This will generate structured emotion reasoning chains aligned with the EmotionCoT format.
+This will generate structured emotion reasoning chains aligned with the EmotionCoT format. Add `--dry-run 3` to print the filled-in prompts without calling the API.
 
 
 
