@@ -84,7 +84,7 @@ The **EmotionCoT** section provide structured prosody labeling and Chain-of-Thou
 
 **EmotionCoT Annotations:** We provide prosody labeling and CoT-style emotion reasoning annotations for: IEMOCAP, MELD, Expresso, EARS, MSP-Podcast (partial). Please download the EmotionCoT dataset on [Hugging Face](https://huggingface.co/datasets/ddwang2000/EmotionCoT)
 
-### Automatic Labeling Pipeline (Comming Soon)
+### Automatic Labeling Pipeline 
 
 To facilitate large-scale labeling and data augmentation, we provide an automated prosody labeling pipeline for EmotionCoT.
 
